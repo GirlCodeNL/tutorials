@@ -42,7 +42,7 @@
     var hasWon = function() {
       var boxes = Boxes.find().fetch();
       var player = Session.get('player');
-      if(boxes[0] && boxes[0].player) {
+      if(boxes.length && Boxes.findOne({'player': {$exists: true}})) {
         if (boxes[0].player == player && boxes[1].player == player && boxes[2].player == player) {
           return true;
         }
@@ -53,7 +53,7 @@
       }
       return false;
     };
-{{/prism}}
+  {{/prism}}
 <p>You can check if someone has won in box's click event handler. Make sure that the function is called <i>after</i> you have updated the Collection, but <i>before</i> you switch players.</p>
 {{#prism language="javascript" class="line-numbers"}}
   var sessionPlayer = Session.get('player');
